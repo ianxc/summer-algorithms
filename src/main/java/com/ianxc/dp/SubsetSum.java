@@ -103,10 +103,8 @@ public class SubsetSum {
 
         @Override
         public String toString() {
-            var sb = new StringBuilder();
-            sb.append("found: ")
-                    .append(found)
-                    .append('\n');
+            var sb = new StringBuilder("found: ");
+            sb.append(found).append('\n');
 
             sb.append("isSum:\n");
             for (var row : isSum) {
