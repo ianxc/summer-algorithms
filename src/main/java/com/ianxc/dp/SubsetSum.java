@@ -1,12 +1,14 @@
 package com.ianxc.dp;
 
-import com.ianxc.core.CoreUtil;
-
 import java.util.Arrays;
 
-import static com.ianxc.core.CoreUtil.*;
+import com.ianxc.core.CoreUtil;
+import static com.ianxc.core.CoreUtil.dbg;
+import static com.ianxc.core.CoreUtil.println;
+import static com.ianxc.core.CoreUtil.require;
 
 public class SubsetSum {
+
     private static final int NIL_PARENT = -1;
 
     public static SubsetSumAnswer subsetSum(int[] s, int targetSum) {
@@ -52,8 +54,8 @@ public class SubsetSum {
                 if (partSum >= s[row - 1] && isSum[row - 1][partSum - s[row - 1]]) {
                     int row_ = row;
                     int partSum_ = partSum;
-                    dbg(() -> System.out.printf("row=%2d  partSum=%2d  s[row-1]=%2d  " +
-                            "partSum-s[row-1]=%2d  check is_sum[%2d][%2d]\n",
+                    dbg(() -> System.out.printf(
+                            "row=%2d  partSum=%2d  s[row-1]=%2d  partSum-s[row-1]=%2d  check is_sum[%2d][%2d]\n",
                             row_, partSum_, s[row_ - 1], partSum_ - s[row_ - 1], row_ - 1,
                             partSum_ - s[row_ - 1]));
 
@@ -96,6 +98,7 @@ public class SubsetSum {
             boolean found,
             boolean[][] isSum,
             int[][] parent) {
+
         public SubsetSumAnswer {
             require(isSum.length == parent.length,
                     () -> "isSum should have same number of rows as parent");

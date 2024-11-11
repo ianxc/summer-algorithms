@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 class Node<T> {
+
     T value;
     Node<T> next;
 
@@ -16,6 +17,7 @@ class Node<T> {
 }
 
 public class SinglyLinkedList<T> {
+
     @Nullable
     private Node<T> head = null;
 
@@ -40,6 +42,7 @@ public class SinglyLinkedList<T> {
         if (this.size == 0) {
             return Optional.empty();
         }
+
         assert this.head != null;
         var oldHead = this.head;
         var oldHeadValue = oldHead.value;
@@ -58,8 +61,9 @@ public class SinglyLinkedList<T> {
     }
 
     Optional<T> get(int index) {
-        if (index < 0 || index >= this.size)
+        if (index < 0 || index >= this.size) {
             return Optional.empty();
+        }
 
         // No need to check for && curr != null in guard if we have the size already.
         assert this.head != null;

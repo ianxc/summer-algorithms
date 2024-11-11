@@ -1,15 +1,16 @@
 package com.ianxc.core;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 import java.util.function.Supplier;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Intended for static import
  */
 public class CoreUtil {
+
     public static void println() {
         System.out.println();
     }

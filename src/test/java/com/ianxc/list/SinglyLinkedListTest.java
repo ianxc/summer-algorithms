@@ -6,6 +6,7 @@ import static com.ianxc.core.CoreUtil.println;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 public class SinglyLinkedListTest {
+
     @Test
     void testPushAndPop() {
         var xs = new SinglyLinkedList<Integer>();
@@ -110,6 +111,14 @@ public class SinglyLinkedListTest {
             s.assertThat(xs)
                     .asString()
                     .isEqualTo("SinglyLinkedList[1 > 97 > 89 > 88 > 98 > 99 > 6 > *]");
+        });
+
+        xs.clear();
+        println(xs);
+
+        assertSoftly(s -> {
+            s.assertThat(xs.size()).isZero();
+            s.assertThat(xs.peek()).isEmpty();
         });
     }
 

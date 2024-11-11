@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
 public class Ref<T> implements Supplier<T> {
+
     @NotNull
     public T data;
 

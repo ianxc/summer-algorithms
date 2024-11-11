@@ -1,10 +1,11 @@
 package com.ianxc.dp;
 
-import static com.ianxc.core.CoreUtil.println;
-
 import org.junit.jupiter.api.Test;
 
+import static com.ianxc.core.CoreUtil.println;
+
 public class SubsetSumTest {
+
     @Test
     void testSubsetSum() {
         int[] s = { 1, 2, 4, 8 };
