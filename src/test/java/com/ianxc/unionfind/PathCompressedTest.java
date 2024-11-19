@@ -21,12 +21,13 @@ public class PathCompressedTest {
         unionFind.union(2, 3);
         unionFind.union(1, 2);
         unionFind.union(0, 1);
+        var foundRoot5 = unionFind.find(5);
+        assertThat(foundRoot5).isEqualTo(0);
         assertThat(unionFind)
                 .hasToString("PathCompressed[size=6, root=[0, 0, 1, 2, 3, 4]]");
 
-        var root5 = unionFind.findCompressed(5);
-
-        assertThat(root5).isEqualTo(0);
+        var foundPathCompressedRoot5 = unionFind.findCompressed(5);
+        assertThat(foundPathCompressedRoot5).isEqualTo(0);
         assertThat(unionFind)
                 .hasToString("PathCompressed[size=6, root=[0, 0, 0, 0, 0, 0]]");
     }
