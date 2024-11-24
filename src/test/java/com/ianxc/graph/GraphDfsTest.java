@@ -44,8 +44,10 @@ public class GraphDfsTest {
 
         var result = GraphDfs.traverseGraph(g);
         assertThat(result.preorder())
-                .isEqualTo(List.<Character>of('8', '9', 'a', 'b', 'h', 'w', 'x', 'y', 'z', 'f', 'g', 'c', 'd', 'e'));
+                .isEqualTo(List.of('8', '9', 'a', 'b', 'h', 'w', 'x', 'y', 'z', 'f', 'g', 'c', 'd',
+                        'e'));
         assertThat(result.postorder())
-                .isEqualTo(List.<Character>of('8', '9', 'h', 'z', 'y', 'x', 'w', 'b', 'f', 'g', 'd', 'e', 'c', 'a'));
+                .isEqualTo(List.of('8', '9', 'h', 'z', 'y', 'x', 'w', 'b', 'f', 'g', 'd',
+                        'e', 'c', 'a'));
     }
 }
