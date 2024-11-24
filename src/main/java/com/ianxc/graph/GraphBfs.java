@@ -6,11 +6,12 @@ import static com.ianxc.core.CoreUtil.println;
 import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GraphBfs {
 
-    static <T> void traverseGraph(AdjacencyListGraph<T> g) {
+    static <T> List<T> traverseGraph(AdjacencyListGraph<T> g) {
         var processed = new LinkedHashSet<T>();
         // Handle disconnected components of the graph too.
         // Start from a deterministic vertex by getting them in sorted order
@@ -23,6 +24,7 @@ public class GraphBfs {
             }
         }
         dbg(() -> System.out.printf("BFS processed order %s\n", processed));
+        return List.copyOf(processed);
     }
 
     static <T> void traverseGraph(AdjacencyListGraph<T> g, Set<T> processed, T start) {
