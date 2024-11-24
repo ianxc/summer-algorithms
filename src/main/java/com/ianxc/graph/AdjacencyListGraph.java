@@ -1,5 +1,7 @@
 package com.ianxc.graph;
 
+import static com.ianxc.core.CoreUtil.require;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,15 +16,7 @@ record EdgePair<T>(T source, T destination, int weight) {
     }
 }
 
-class Edge<T> {
-    T destination;
-    int weight;
-
-    public Edge(T destination, int weight) {
-        this.destination = destination;
-        this.weight = weight;
-    }
-
+record Edge<T>(T destination, int weight) {
     @Override
     public String toString() {
         return String.format("[->%s, w=%d]", this.destination, this.weight);
@@ -50,12 +44,16 @@ public class AdjacencyListGraph<T> {
         return this.numEdges;
     }
 
-    public int numVerticies() {
+    public int numVertices() {
         return this.numVertices;
     }
 
     public Set<T> vertices() {
         return adjList.keySet();
+    }
+
+    public List<T> sortedVertices() {
+        return adjList.keySet().stream().sorted().toList();
     }
 
     public Set<EdgePair<T>> edges() {
@@ -64,8 +62,12 @@ public class AdjacencyListGraph<T> {
                 .flatMap(entry -> entry.getValue()
                         .stream()
                         .map(edge -> new EdgePair<T>(
-                                entry.getKey(), edge.destination, edge.weight)))
+                                entry.getKey(), edge.destination(), edge.weight())))
                 .collect(Collectors.toUnmodifiableSet());
+    }
+
+    public List<Edge<T>> neighbors(T source) {
+        return this.adjList.get(source);
     }
 
     public void addVertex(T vertex) {
@@ -95,7 +97,7 @@ public class AdjacencyListGraph<T> {
     public void removeVertex(T vertex) {
         for (var dests : this.adjList.values()) {
             var numBefore = dests.size();
-            dests.removeIf(edge -> edge.destination.equals(vertex));
+            dests.removeIf(edge -> edge.destination().equals(vertex));
 
             if (this.isDirected) {
                 var numAfter = dests.size();
@@ -117,7 +119,7 @@ public class AdjacencyListGraph<T> {
     public void removeEdge(T source, T destination) {
         var edgesWithSource = this.adjList.get(source);
         var numEdgesBefore = edgesWithSource.size();
-        edgesWithSource.removeIf(edge -> edge.destination.equals(destination));
+        edgesWithSource.removeIf(edge -> edge.destination().equals(destination));
         var numEdgesAfter = edgesWithSource.size();
         var numEdgesRemoved = numEdgesBefore - numEdgesAfter;
         this.numEdges -= numEdgesRemoved;
@@ -125,7 +127,7 @@ public class AdjacencyListGraph<T> {
         if (!this.isDirected) {
             this.adjList
                     .get(destination)
-                    .removeIf(edge -> edge.destination.equals(source));
+                    .removeIf(edge -> edge.destination().equals(source));
         }
     }
 
@@ -133,7 +135,8 @@ public class AdjacencyListGraph<T> {
     public String toString() {
         var sb = new StringBuilder();
         sb.append(this.isDirected ? "Directed" : "Undirected");
-        sb.append(String.format(" vertices=%d edges=%d\n", this.numVertices, this.numEdges));
+        sb.append(String.format(" vertices=%d edges=%d\n",
+                this.numVertices, this.numEdges));
         this.adjList
                 .keySet()
                 .stream()
@@ -144,9 +147,9 @@ public class AdjacencyListGraph<T> {
                     this.adjList
                             .get(source)
                             .forEach(edge -> {
-                                sb.append(edge.destination);
+                                sb.append(edge.destination());
                                 sb.append(" (");
-                                sb.append(edge.weight);
+                                sb.append(edge.weight());
                                 sb.append("), ");
                             });
                     sb.append("*\n");
