@@ -32,9 +32,4 @@ class TrieNode {
 public class Trie {
     @NotNull
     private TrieNode[] children = new TrieNode[26];
-
-    @NotNull
-    Trie insert(String word) {
-        return this;
-    }
 }

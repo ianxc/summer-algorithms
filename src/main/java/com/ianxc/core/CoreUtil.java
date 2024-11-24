@@ -71,6 +71,12 @@ public class CoreUtil {
         }
     }
 
+    public static void dbg(boolean on, Runnable r) {
+        if (on) {
+            r.run();
+        }
+    }
+
     public static boolean isLastIndex(@NotNull Object[] xs, int index) {
         return index == xs.length - 1;
     }
