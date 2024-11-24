@@ -1,7 +1,5 @@
 package com.ianxc.graph;
 
-import static com.ianxc.core.CoreUtil.require;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
